@@ -24,7 +24,7 @@ public class Appointment {
         private Long idAppointment;
 
         @Column(name = "date and time")
-        private LocalDateTime dateTime;;
+        private LocalDateTime dateTime;
 
         @Column(name = "patient")
         private String patient;
