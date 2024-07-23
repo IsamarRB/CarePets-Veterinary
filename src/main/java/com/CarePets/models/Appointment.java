@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -23,7 +24,7 @@ public class Appointment {
         private Long idAppointment;
 
         @Column(name = "date and time")
-        private int name;
+        private LocalDateTime dateTime;;
 
         @Column(name = "patient")
         private String patient;
@@ -36,5 +37,9 @@ public class Appointment {
 
         @Column(name = "appointment status")
         private String status;
+
+        @ManyToOne
+        @JoinColumn (name = "idPet", nullable = false)
+        private Pet pet;
     }
 
