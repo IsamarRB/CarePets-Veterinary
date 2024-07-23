@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -23,7 +25,7 @@ public class Appointment {
         private Long idAppointment;
 
         @Column(name = "date and time")
-        private int name;
+        private LocalDateTime dateTime;
 
         @Column(name = "patient")
         private String patient;
