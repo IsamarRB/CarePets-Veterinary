@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -35,4 +37,9 @@ public class Pet {
 
     @Column(name = "url")
     private String url;
+
+    @OneToMany(mappedBy = "pet")
+    private List<Guardian> guardiansList;
+    @OneToMany(mappedBy = "pet")
+    private List<Appointment> appointmentList;
 }

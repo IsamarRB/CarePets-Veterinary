@@ -36,5 +36,9 @@ public class Appointment {
 
         @Column(name = "appointment status")
         private String status;
+
+        @ManyToOne
+        @JoinColumn (name = "idPet", nullable = false)
+        private Pet pet;
     }
 

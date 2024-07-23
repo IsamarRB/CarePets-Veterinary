@@ -27,4 +27,8 @@ public class Guardian {
 
         @Column(name = "telephone number")
         private int telephoneNumber;
+
+        @ManyToOne
+        @JoinColumn (name = "idPet", nullable = false)
+        private Pet pet;
     }
