@@ -26,9 +26,6 @@ public class Appointment {
         @Column(name = "date and time")
         private LocalDateTime dateTime;;
 
-        @Column(name = "patient")
-        private String patient;
-
         @Column(name = "standard/urgent consultation")
         private String typeConsult;
 
@@ -41,5 +38,7 @@ public class Appointment {
         @ManyToOne
         @JoinColumn (name = "idPet", nullable = false)
         private Pet pet;
+
+
     }
 
