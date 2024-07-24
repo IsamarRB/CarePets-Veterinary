@@ -30,4 +30,7 @@ public class AppointmentService {
     public Appointment getAppointmentByType(String typeConsult){
         return iAppointmentRepository.findByTypeConsult(typeConsult);
     }
+    public Appointment getAppointmentByStatus(String status){
+        return iAppointmentRepository.findByStatus(status);
+    }
 }
