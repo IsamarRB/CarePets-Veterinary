@@ -1,11 +1,20 @@
 package com.CarePets.controllers;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.CarePets.models.Appointment;
+import com.CarePets.services.AppointmentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/pet")
+@RequestMapping("/appointment")
 @CrossOrigin(origins = "*")
+
 public class AppointmentController {
+    @Autowired
+    AppointmentService appointmentService;
+
+    @PutMapping(path = "/appointments/{id}")
+    public void updateAppointment(@RequestBody Appointment appointment, @PathVariable Long id){
+        appointmentService.updateAppointment(appointment, id);
+    }
 }
