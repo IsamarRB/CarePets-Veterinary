@@ -5,13 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping()
+@RequestMapping("/pet")
 @CrossOrigin(origins = "*")
 public class PetController {
     @Autowired
      PetService petService;
 
-    @DeleteMapping(path = "images/{id}")
+    @DeleteMapping(path = "pets/{id}")
     public void deletePet(@PathVariable Long id){
         petService.deletePet(id);
     }
