@@ -18,10 +18,11 @@ public class AppointmentService {
 
     @Autowired
     IAppointmentRepository iAppointmentRepository;
+    @Autowired
     IPetRepository iPetRepository;
 
     public Appointment createAppoinment(CreateAppointmentRequest request) throws Exception {
-        Optional<Pet> optionalPet = iPetRepository.findById(request.getPetId());
+        Optional<Pet> optionalPet = iPetRepository.findById(request.getIdPet());
         if (!optionalPet.isPresent()){
             throw new Exception("Pet not found");
         }
@@ -47,10 +48,6 @@ public class AppointmentService {
         return iAppointmentRepository.findById(id);
     }
 
-    /*public Appointment getAppointmentByName(Pet pet) {
-        String petName = pet.getName();
-        return (Appointment) iAppointmentRepository.findByName(petName);
-    }*/
 
     public Appointment getAppointmentByType(String typeConsult) {
         return iAppointmentRepository.findByTypeConsult(typeConsult);
