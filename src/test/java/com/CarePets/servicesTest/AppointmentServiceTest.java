@@ -3,17 +3,20 @@ package com.CarePets.servicesTest;
 import com.CarePets.models.Appointment;
 import com.CarePets.repositories.IAppointmentRepository;
 import com.CarePets.services.AppointmentService;
+import jakarta.persistence.Column;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import java.time.LocalDateTime;
 
 import static org.mockito.Mockito.*;
 
 public class AppointmentServiceTest {
 
     @Mock
-    private IAppointmentRepository appointmentRepository;
+    private IAppointmentRepository iappointmentRepository;
 
     @InjectMocks
     private AppointmentService appointmentService;
@@ -24,11 +27,24 @@ public class AppointmentServiceTest {
 
     @Test
     public void testUpdateAppointment() {
-        Appointment appointment = new Appointment();
-        appointment.setIdAppointment(1L);
+        Appointment updateappointment = new Appointment();
+        Long idAppointment = 1L;
+        LocalDateTime dateTime = LocalDateTime.now();
+        String typeConsult = "standard";
+        String reason = "he feels bad";
+        String status= "Past";
 
-        appointmentService.updateAppointment(appointment, 1L);
+        updateappointment.setIdAppointment(idAppointment);
+        updateappointment.setDateTime(dateTime);
+        updateappointment.setTypeConsult(typeConsult);
+        updateappointment.setReason(reason);
+        updateappointment.setStatus(status);
 
-        verify(appointmentRepository, times(1)).save(appointment);
+        when(iappointmentRepository.save(updateappointment)).thenReturn(updateappointment);
+
+        appointmentService.updateAppointment();
+
+
+        verify(iappointmentRepository, times(1)).save(updateappointment);
     }
 }
