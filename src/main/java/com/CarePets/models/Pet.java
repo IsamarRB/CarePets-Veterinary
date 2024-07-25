@@ -1,5 +1,6 @@
 package com.CarePets.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -39,7 +40,9 @@ public class Pet {
     private String url;
 
     @OneToMany(mappedBy = "pet")
+    @JsonManagedReference
     private List<Guardian> guardiansList;
     @OneToMany(mappedBy = "pet")
+    @JsonManagedReference
     private List<Appointment> appointmentList;
 }

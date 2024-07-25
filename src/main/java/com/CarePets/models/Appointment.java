@@ -1,5 +1,6 @@
 package com.CarePets.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,6 +37,7 @@ public class Appointment {
 
         @ManyToOne
         @JoinColumn (name = "idPet", nullable = false)
+        @JsonManagedReference
         private Pet pet;
 
 
