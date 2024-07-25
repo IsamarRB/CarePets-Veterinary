@@ -7,9 +7,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface IAppointmentRepository extends CrudRepository<Appointment,Long> {
-   Appointment findByName(String name);
+   //Appointment findByName(String name);
    Appointment findByTypeConsult(String typeConsult);
    Appointment findByStatus(String status);
-   boolean isDateAvailable(LocalDateTime localDateTime);
+   //boolean availableDate(LocalDateTime localDateTime);
 
 }
