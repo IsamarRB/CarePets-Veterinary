@@ -19,7 +19,6 @@ public class Appointment {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-
         @Column(name = "id appointment")
         private Long idAppointment;
 
