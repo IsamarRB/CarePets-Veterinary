@@ -3,6 +3,7 @@ package com.CarePets.dto;
 import java.time.LocalDateTime;
 
 public class CreateAppointmentRequest {
+
     private Long petId;
     private LocalDateTime dateTime;
     private String typeConsult;
