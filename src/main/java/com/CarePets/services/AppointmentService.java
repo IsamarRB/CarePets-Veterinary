@@ -1,5 +1,6 @@
 package com.CarePets.services;
 
+import com.CarePets.dto.CreateAppointmentRequest;
 import com.CarePets.models.Appointment;
 import com.CarePets.models.Pet;
 import com.CarePets.repositories.IAppointmentRepository;
@@ -19,14 +20,24 @@ public class AppointmentService {
     IAppointmentRepository iAppointmentRepository;
     IPetRepository iPetRepository;
 
-    public Appointment createAppoinment(Pet pet, LocalDateTime localDateTime, Appointment newAppointment) throws Exception {
-        if (availableDate(localDateTime)) {
-            newAppointment.setPet(pet);
-            return iAppointmentRepository.save(newAppointment);
-        }else{
-            throw new Exception("Appointment date and time are already taken.");
+    public Appointment createAppoinment(CreateAppointmentRequest request) throws Exception {
+        Optional<Pet> optionalPet = iPetRepository.findById(request.getPetId());
+        if (!optionalPet.isPresent()){
+            throw new Exception("Pet not found");
         }
-    }
+
+        Pet pet = optionalPet.get();
+        if (availableDate(request.getDateTime())) {
+            Appointment newAppointment = new Appointment();
+            newAppointment.setPet(pet);
+            newAppointment.setDateTime(request.getDateTime());
+            newAppointment.setTypeConsult(request.getTypeConsult());
+            newAppointment.setReason(request.getReason());
+            newAppointment.setStatus(request.getStatus());
+            return iAppointmentRepository.save(newAppointment);
+        } else {
+            throw new Exception("Appointment date and time are already taken.");
+    }}
 
     public ArrayList<Appointment> getAllAppointments() {
         return (ArrayList<Appointment>) iAppointmentRepository.findAll();

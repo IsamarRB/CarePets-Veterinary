@@ -1,5 +1,6 @@
 package com.CarePets.controllers;
 
+import com.CarePets.dto.CreateAppointmentRequest;
 import com.CarePets.models.Appointment;
 import com.CarePets.models.Pet;
 import com.CarePets.services.AppointmentService;
@@ -12,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/appointment")
+@CrossOrigin(origins = "*")
 public class AppointmentController {
 
     @Autowired
@@ -19,8 +21,8 @@ public class AppointmentController {
 
 
     @PostMapping("/appointments")
-    public Appointment createAppointment(@RequestBody Appointment newAppointment){
-        return appointmentService.createAppoinment(Pet pet, LocalDateTime localDateTime,newAppointment )
+    public Appointment createAppointment(@RequestBody CreateAppointmentRequest request) throws Exception {
+        return appointmentService.createAppoinment(request);
 
     }
     @GetMapping
