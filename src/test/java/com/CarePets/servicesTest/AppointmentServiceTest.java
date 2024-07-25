@@ -69,33 +69,6 @@ public void test_if_getAppointmentByType_gets_appointment() {
 
 }
 
-/*@Test
-public void test_if_getAppointmentByName_gets_appointment() {
-    //arrange
-    List<Guardian> guardianList = new ArrayList<Guardian>();
-    List<Appointment> appointmentList = new ArrayList<Appointment>();
-    Pet bolita = new Pet(1L, "bolita", 2, "demogorgon", "female", "url", guardianList, appointmentList);
-    Appointment ap1 = new Appointment(1L, LocalDateTime.now(), "urgent", "tummy ache", "past", bolita);
-    Pet jaro = new Pet(2L, "jaro", 2, "golden retrieve", "male", "url", guardianList, appointmentList);
-    Appointment ap2 = new Appointment(2L, LocalDateTime.now(), "urgent", "tummy ache", "past", jaro);
-    appointmentList.add(ap1);
-    appointmentList.add(ap2);
-    when(iAppointmentRepository.findAll()).thenReturn(appointmentList);
-    when(iAppointmentRepository.findByName("jaro")).thenReturn(ap2);
-
-    //act
-    ArrayList<Appointment> result = appointmentService.getAllAppointments();
-    Appointment result2 = appointmentService.getAppointmentByName(jaro);
-
-
-    //assert
-    assertNotNull(result);
-    assertEquals(2, result.size());
-    assertEquals("jaro", result.get(1).getPet().getName());
-    assertEquals("jaro", result2.getPet().getName());
-
-}*/
-
 @Test
 public void test_if_getAppointmentByStatus_gets_appointment() {
     //arrange
