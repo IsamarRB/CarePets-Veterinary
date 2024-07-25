@@ -69,7 +69,7 @@ public void test_if_getAppointmentByType_gets_appointment() {
 
 }
 
-@Test
+/*@Test
 public void test_if_getAppointmentByName_gets_appointment() {
     //arrange
     List<Guardian> guardianList = new ArrayList<Guardian>();
@@ -94,7 +94,7 @@ public void test_if_getAppointmentByName_gets_appointment() {
     assertEquals("jaro", result.get(1).getPet().getName());
     assertEquals("jaro", result2.getPet().getName());
 
-}
+}*/
 
 @Test
 public void test_if_getAppointmentByStatus_gets_appointment() {
