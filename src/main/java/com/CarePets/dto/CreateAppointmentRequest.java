@@ -4,18 +4,19 @@ import java.time.LocalDateTime;
 
 public class CreateAppointmentRequest {
 
-    private Long petId;
+
     private LocalDateTime dateTime;
     private String typeConsult;
     private String reason;
     private String status;
+    private Long idPet;
 
-    public Long getPetId() {
-        return petId;
+    public Long getIdPet() {
+        return idPet;
     }
 
-    public void setPetId(Long petId) {
-        this.petId = petId;
+    public void setIdPet(Long idPet) {
+        this.idPet = idPet;
     }
 
     public LocalDateTime getDateTime() {
