@@ -20,7 +20,7 @@ public class AppointmentService {
     IPetRepository iPetRepository;
 
     public Appointment createAppoinment(Pet pet, LocalDateTime localDateTime, Appointment newAppointment) throws Exception {
-        if (isDateAvailable(localDateTime)) {
+        if (availableDate(localDateTime)) {
             newAppointment.setPet(pet);
             return iAppointmentRepository.save(newAppointment);
         }else{
@@ -36,10 +36,10 @@ public class AppointmentService {
         return iAppointmentRepository.findById(id);
     }
 
-    public Appointment getAppointmentByName(Pet pet) {
+    /*public Appointment getAppointmentByName(Pet pet) {
         String petName = pet.getName();
         return (Appointment) iAppointmentRepository.findByName(petName);
-    }
+    }*/
 
     public Appointment getAppointmentByType(String typeConsult) {
         return iAppointmentRepository.findByTypeConsult(typeConsult);
@@ -49,9 +49,9 @@ public class AppointmentService {
         return iAppointmentRepository.findByStatus(status);
     }
 
-    public boolean isDateAvailable(LocalDateTime localDateTime) {
-        List<Appointment> newList = getAllAppointments();
-        for (Appointment app : newList) {
+    public boolean availableDate(LocalDateTime localDateTime) {
+        List<Appointment> appointments = (List<Appointment>) iAppointmentRepository.findAll();
+        for (Appointment app : appointments) {
             if (app.getDateTime().equals(localDateTime)) {
                 return false;
             }
