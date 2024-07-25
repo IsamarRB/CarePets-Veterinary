@@ -4,11 +4,9 @@ import com.CarePets.models.Appointment;
 import com.CarePets.models.Pet;
 import com.CarePets.services.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +17,12 @@ public class AppointmentController {
     @Autowired
     AppointmentService appointmentService;
 
+
+    @PostMapping("/appointments")
+    public Appointment createAppointment(@RequestBody Appointment newAppointment){
+        return appointmentService.createAppoinment(Pet pet, LocalDateTime localDateTime,newAppointment )
+
+    }
     @GetMapping
     public List<Appointment> getAllAppointments(){
         return appointmentService.getAllAppointments();
@@ -31,10 +35,10 @@ public class AppointmentController {
     public Appointment getAppointmentByType(@PathVariable String consultType){
         return appointmentService.getAppointmentByType(consultType);
     }
-    @GetMapping("/appointments/{petName}")
+    /*@GetMapping("/appointments/{petName}")
     public Appointment getAppointmentByPetName(@PathVariable Pet pet){
         return appointmentService.getAppointmentByName(pet);
-    }
+    }*/
 
     @GetMapping("/appointments/{status}")
     public Appointment getAppointmentByStatus(@PathVariable String status){
