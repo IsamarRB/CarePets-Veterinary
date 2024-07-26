@@ -6,6 +6,7 @@ import com.CarePets.models.Guardian;
 import com.CarePets.models.Pet;
 import com.CarePets.repositories.IAppointmentRepository;
 import com.CarePets.services.AppointmentService;
+import net.bytebuddy.asm.Advice;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -143,5 +144,6 @@ public class AppointmentControllerTest {
         assertEquals(2, result.size());
         verify(appointmentService).getAllAppointments();
     }
+
 }
 
