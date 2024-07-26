@@ -5,9 +5,7 @@ import com.CarePets.dto.CreateAppointmentRequest;
 import com.CarePets.models.Appointment;
 import com.CarePets.models.Guardian;
 import com.CarePets.models.Pet;
-import com.CarePets.repositories.IAppointmentRepository;
 import com.CarePets.services.AppointmentService;
-import net.bytebuddy.asm.Advice;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -32,8 +30,6 @@ public class AppointmentControllerTest {
 
     @InjectMocks
     private AppointmentController appointmentController;
-    private Appointment appointment;
-    private Pet pet;
 
     @BeforeEach
     public void setUp() {
@@ -41,7 +37,7 @@ public class AppointmentControllerTest {
     }
 
     @Test
-    public void testCreateAppointment_when_create_appointment() throws Exception{
+    public void testCreateAppointment_when_create_appointment() throws Exception {
         CreateAppointmentRequest request = new CreateAppointmentRequest();
         request.setIdPet(1L);
         request.setDateTime(LocalDateTime.of(2024, 7, 25, 10, 0));
@@ -62,7 +58,7 @@ public class AppointmentControllerTest {
 
         Appointment createdAppointment = appointmentController.createAppointment(request);
         assertEquals(bolita, createdAppointment.getPet());
-        assertEquals(request.getDateTime(),createdAppointment.getDateTime());
+        assertEquals(request.getDateTime(), createdAppointment.getDateTime());
         assertEquals(request.getTypeConsult(), createdAppointment.getTypeConsult());
         assertEquals(request.getReason(), createdAppointment.getReason());
         assertEquals(request.getStatus(), createdAppointment.getStatus());
