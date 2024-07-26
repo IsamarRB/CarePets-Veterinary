@@ -1,5 +1,6 @@
 package com.CarePets.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -39,10 +40,9 @@ public class Pet {
     @Column(name = "url")
     private String url;
 
+    //@JsonIgnoreProperties("pet")
     @OneToMany(mappedBy = "pet")
-    @JsonManagedReference
     private List<Guardian> guardiansList;
     @OneToMany(mappedBy = "pet")
-    @JsonManagedReference
-    private List<Appointment> appointmentList;
+    private List<Appointment> appointmentsList;
 }
