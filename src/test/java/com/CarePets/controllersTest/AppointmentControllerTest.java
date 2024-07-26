@@ -1,6 +1,7 @@
 package com.CarePets.controllersTest;
 
 import com.CarePets.controllers.AppointmentController;
+import com.CarePets.dto.CreateAppointmentRequest;
 import com.CarePets.models.Appointment;
 import com.CarePets.models.Guardian;
 import com.CarePets.models.Pet;
@@ -39,6 +40,34 @@ public class AppointmentControllerTest {
         MockitoAnnotations.openMocks(this);
     }
 
+    @Test
+    public void testCreateAppointment_when_create_appointment() throws Exception{
+        CreateAppointmentRequest request = new CreateAppointmentRequest();
+        request.setIdPet(1L);
+        request.setDateTime(LocalDateTime.of(2024, 7, 25, 10, 0));
+        request.setTypeConsult("standard");
+        request.setReason("annual check up");
+        request.setStatus("past");
+
+        Pet bolita = new Pet(1L, "bolita", 2, "demogorgon", "female", "url", null, null);
+        Appointment newAppointment = new Appointment();
+        newAppointment.setPet(bolita);
+        newAppointment.setDateTime(request.getDateTime());
+        newAppointment.setTypeConsult(request.getTypeConsult());
+        newAppointment.setReason(request.getReason());
+        newAppointment.setStatus(request.getStatus());
+
+        when(appointmentService.createAppoinment(request)).thenReturn(newAppointment);
+
+
+        Appointment createdAppointment = appointmentController.createAppointment(request);
+        assertEquals(bolita, createdAppointment.getPet());
+        assertEquals(request.getDateTime(),createdAppointment.getDateTime());
+        assertEquals(request.getTypeConsult(), createdAppointment.getTypeConsult());
+        assertEquals(request.getReason(), createdAppointment.getReason());
+        assertEquals(request.getStatus(), createdAppointment.getStatus());
+
+    }
 
     @Test
     public void test_if_getAppointmentByType_gets_appointment() {
