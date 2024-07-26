@@ -21,23 +21,25 @@ public class AppointmentController {
     @PostMapping("/appointments")
     public Appointment createAppointment(@RequestBody CreateAppointmentRequest request) throws Exception {
         return appointmentService.createAppoinment(request);
-
     }
+
     @GetMapping("/appointments")
-    public List<Appointment> getAllAppointments(){
+    public List<Appointment> getAllAppointments() {
         return appointmentService.getAllAppointments();
     }
+
     @GetMapping("/appointments/{id}")
-    public Optional<Appointment> getAppointmentById(@PathVariable Long id){
+    public Optional<Appointment> getAppointmentById(@PathVariable Long id) {
         return appointmentService.getAppointmentById(id);
     }
+
     @GetMapping("/appointments/type")
-    public Appointment getAppointmentByType(@RequestParam String consultType){
+    public Appointment getAppointmentByType(@RequestParam String consultType) {
         return appointmentService.getAppointmentByType(consultType);
     }
 
     @GetMapping("/appointments/status")
-    public Appointment getAppointmentByStatus(@RequestParam String status){
+    public Appointment getAppointmentByStatus(@RequestParam String status) {
         return appointmentService.getAppointmentByStatus(status);
     }
 }
