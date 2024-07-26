@@ -23,7 +23,7 @@ public class AppointmentService {
 
     public Appointment createAppoinment(CreateAppointmentRequest request) throws Exception {
         Optional<Pet> optionalPet = iPetRepository.findById(request.getIdPet());
-        if (!optionalPet.isPresent()){
+        if (!optionalPet.isPresent()) {
             throw new Exception("Pet not found");
         }
 
@@ -38,7 +38,8 @@ public class AppointmentService {
             return iAppointmentRepository.save(newAppointment);
         } else {
             throw new Exception("Appointment date and time are already taken.");
-    }}
+        }
+    }
 
     public ArrayList<Appointment> getAllAppointments() {
         return (ArrayList<Appointment>) iAppointmentRepository.findAll();
