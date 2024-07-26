@@ -39,4 +39,3 @@ public class Appointment {
         @JoinColumn (name = "idPet", nullable = false)
         private Pet pet;
     }
-

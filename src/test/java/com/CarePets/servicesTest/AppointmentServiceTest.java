@@ -11,6 +11,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDateTime;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class AppointmentServiceTest {
@@ -27,24 +28,22 @@ public class AppointmentServiceTest {
 
     @Test
     public void testUpdateAppointment() {
-        Appointment updateappointment = new Appointment();
+        Appointment updateAppointment = new Appointment();
         Long idAppointment = 1L;
         LocalDateTime dateTime = LocalDateTime.now();
         String typeConsult = "standard";
         String reason = "he feels bad";
         String status= "Past";
 
-        updateappointment.setIdAppointment(idAppointment);
-        updateappointment.setDateTime(dateTime);
-        updateappointment.setTypeConsult(typeConsult);
-        updateappointment.setReason(reason);
-        updateappointment.setStatus(status);
+        updateAppointment.setIdAppointment(idAppointment);
+        updateAppointment.setDateTime(dateTime);
+        updateAppointment.setTypeConsult(typeConsult);
+        updateAppointment.setReason(reason);
+        updateAppointment.setStatus(status);
 
-        when(iappointmentRepository.save(updateappointment)).thenReturn(updateappointment);
-
-        appointmentService.updateAppointment();
+        appointmentService.updateAppointment(updateAppointment, idAppointment);
 
 
-        verify(iappointmentRepository, times(1)).save(updateappointment);
+        verify(iappointmentRepository, times(1)).save(updateAppointment);
     }
 }
