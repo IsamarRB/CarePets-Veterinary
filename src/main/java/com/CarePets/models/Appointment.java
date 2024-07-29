@@ -1,7 +1,6 @@
 package com.CarePets.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,7 +35,7 @@ public class Appointment {
         @Column(name = "appointment status")
         private String status;
 
-        //@JsonIgnoreProperties("appointmentsList")
+        @JsonIgnoreProperties("appointmentsList")
         @ManyToOne
         @JoinColumn (name = "idPet", nullable = false)
         private Pet pet;

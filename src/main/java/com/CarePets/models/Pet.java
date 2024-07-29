@@ -1,7 +1,6 @@
 package com.CarePets.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,7 +20,6 @@ import java.util.List;
 public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "id pet")
     private Long idPet;
 
@@ -40,9 +38,11 @@ public class Pet {
     @Column(name = "url")
     private String url;
 
-    //@JsonIgnoreProperties("pet")
+    @JsonIgnoreProperties("pet")
     @OneToMany(mappedBy = "pet")
     private List<Guardian> guardiansList;
+
+    @JsonIgnoreProperties("pet")
     @OneToMany(mappedBy = "pet")
     private List<Appointment> appointmentsList;
 }
