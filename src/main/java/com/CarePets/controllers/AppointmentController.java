@@ -6,6 +6,7 @@ import com.CarePets.services.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,12 +35,12 @@ public class AppointmentController {
     }
 
     @GetMapping("/appointments/type")
-    public Appointment getAppointmentByType(@RequestParam String consultType) {
+    public List<Appointment> getAppointmentByType(@RequestBody String consultType) {
         return appointmentService.getAppointmentByType(consultType);
     }
 
     @GetMapping("/appointments/status")
-    public Appointment getAppointmentByStatus(@RequestParam String status) {
+    public List<Appointment> getAppointmentByStatus(@RequestParam String status) {
         return appointmentService.getAppointmentByStatus(status);
     }
 }
