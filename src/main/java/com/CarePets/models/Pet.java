@@ -1,7 +1,6 @@
 package com.CarePets.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,15 +9,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 
-@Table (name = "Pet")
+@Table(name = "pet")
 
 public class Pet {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    @Column(name = "id pet")
+    @Column(name = "id_pet")
     private Long idPet;
 
     @Column(name = "name")
@@ -35,4 +33,19 @@ public class Pet {
 
     @Column(name = "url")
     private String url;
+
+    public Pet(Long idPet, String name, int age, String race, String gender, String url) {
+        this.idPet = idPet;
+        this.name = name;
+        this.age = age;
+        this.race = race;
+        this.gender = gender;
+        this.url = url;
+    }
+
+    public Pet(Pet pet) {
+    }
+
+    public void update(Pet pet) {
+    }
 }

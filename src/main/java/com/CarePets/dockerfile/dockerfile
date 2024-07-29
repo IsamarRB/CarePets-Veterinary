@@ -1,0 +1,24 @@
+# Dockerfile
+FROM openjdk:11-jre-slim
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
+
+# docker-compose.yml
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:jdbc:mysql://localhost:3306/db_carepetsvet
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=secret
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: clinica
+    ports:
+      - "3306:3306"
