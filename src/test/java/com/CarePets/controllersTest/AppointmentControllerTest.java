@@ -76,19 +76,18 @@ public class AppointmentControllerTest {
         Appointment ap2 = new Appointment(2L, LocalDateTime.now(), "urgent", "tummy ache", "past", bolita);
         appointmentList.add(ap1);
         appointmentList.add(ap2);
-        when(appointmentService.getAllAppointments()).thenReturn(appointmentList);
-        when(appointmentService.getAppointmentByType("urgent")).thenReturn(ap1);
+
+        when(appointmentService.getAppointmentByType("urgent")).thenReturn(appointmentList);
 
         //act
-        List<Appointment> result = appointmentController.getAllAppointments();
-        Appointment result2 = appointmentController.getAppointmentByType("urgent");
+
+        List<Appointment> result2 = appointmentController.getAppointmentByType("urgent");
 
 
         //assert
-        assertNotNull(result);
-        assertEquals(2, result.size());
-        assertEquals("urgent", result.get(0).getTypeConsult());
-        assertEquals("urgent", result2.getTypeConsult());
+
+        assertEquals("urgent", result2.get(0).getTypeConsult());
+
 
     }
 
@@ -104,19 +103,17 @@ public class AppointmentControllerTest {
         Appointment ap2 = new Appointment(2L, LocalDateTime.now(), "urgent", "tummy ache", "past", bolita);
         appointmentList.add(ap1);
         appointmentList.add(ap2);
-        when(appointmentService.getAllAppointments()).thenReturn(appointmentList);
-        when(appointmentService.getAppointmentByStatus("past")).thenReturn(ap2);
+
+        when(appointmentService.getAppointmentByStatus("pending")).thenReturn(appointmentList);
 
 
         //act
-        List<Appointment> result = appointmentController.getAllAppointments();
-        Appointment result2 = appointmentController.getAppointmentByStatus("past");
+
+        List<Appointment> result2 = appointmentController.getAppointmentByStatus("pending");
 
         //assert
-        assertNotNull(result);
-        assertEquals(2, result.size());
-        assertEquals("pending", result.get(0).getStatus());
-        assertEquals("past", result2.getStatus());
+
+        assertEquals("pending", result2.get(0).getStatus());
 
     }
 

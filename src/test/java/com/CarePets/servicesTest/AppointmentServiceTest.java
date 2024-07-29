@@ -77,57 +77,44 @@ public void test_createAppointment() throws Exception {
 
 @Test
 public void test_if_getAppointmentByType_gets_appointment() {
-    //arrange
-    List<Guardian> guardianList = new ArrayList<Guardian>();
-    List<Appointment> appointmentList = new ArrayList<Appointment>();
-    Pet bolita = new Pet(1L, "bolita", 2, "demogorgon", "female", "url", guardianList, appointmentList);
-    Appointment ap1 = new Appointment(1L, LocalDateTime.now(), "urgent", "tummy ache", "past", bolita);
+    // Arrange
+    List<Appointment> appointmentList = new ArrayList<>();
+    Pet bolita = new Pet(1L, "bolita", 2, "demogorgon", "female", "url", new ArrayList<>(), appointmentList);
+    Appointment ap1 = new Appointment(1L, LocalDateTime.now(), "standard", "tummy ache", "pending", bolita);
     Appointment ap2 = new Appointment(2L, LocalDateTime.now(), "urgent", "tummy ache", "past", bolita);
     appointmentList.add(ap1);
     appointmentList.add(ap2);
+
     when(iAppointmentRepository.findAll()).thenReturn(appointmentList);
-    when(iAppointmentRepository.findByTypeConsult("urgent")).thenReturn(ap1);
 
-    //act
-    ArrayList<Appointment> result = appointmentService.getAllAppointments();
-    Appointment result2 = appointmentService.getAppointmentByType("urgent");
+    // Act
+    List<Appointment> result = appointmentService.getAppointmentByType("standard");
 
-
-    //assert
-    assertNotNull(result);
-    assertEquals(2, result.size());
-    assertEquals("urgent", result.get(0).getTypeConsult());
-    assertEquals("urgent", result2.getTypeConsult());
+    // Assert
+    assertEquals(1, result.size());
+    assertEquals("standard", result.get(0).getTypeConsult());
 
 }
 
 @Test
 public void test_if_getAppointmentByStatus_gets_appointment() {
-    //arrange
-    List<Guardian> guardianList = new ArrayList<Guardian>();
-    List<Appointment> appointmentList = new ArrayList<Appointment>();
-    Pet bolita = new Pet(1L, "bolita", 2, "demogorgon", "female", "url", guardianList, appointmentList);
+    // Arrange
+    List<Appointment> appointmentList = new ArrayList<>();
+    Pet bolita = new Pet(1L, "bolita", 2, "demogorgon", "female", "url", new ArrayList<>(), appointmentList);
     Appointment ap1 = new Appointment(1L, LocalDateTime.now(), "standard", "tummy ache", "pending", bolita);
-    Pet bolita2 = new Pet(2L, "bolita", 2, "demogorgon", "female", "url", guardianList, appointmentList);
     Appointment ap2 = new Appointment(2L, LocalDateTime.now(), "urgent", "tummy ache", "past", bolita);
     appointmentList.add(ap1);
     appointmentList.add(ap2);
+
     when(iAppointmentRepository.findAll()).thenReturn(appointmentList);
-    when(iAppointmentRepository.findByStatus("past")).thenReturn(ap2);
 
+    // Act
+    List<Appointment> result = appointmentService.getAppointmentByStatus("past");
 
-    //act
-    ArrayList<Appointment> result = appointmentService.getAllAppointments();
-    Appointment result2 = appointmentService.getAppointmentByStatus("past");
-
-    //assert
-    assertNotNull(result);
-    assertEquals(2, result.size());
-    assertEquals("pending", result.get(0).getStatus());
-    assertEquals("past", result2.getStatus());
-
+    // Assert
+    assertEquals(1, result.size());
+    assertEquals("past", result.get(0).getStatus());
 }
-
 @Test
 public void test_if_getAppointmentById_gets_appointment() {
     //arrange

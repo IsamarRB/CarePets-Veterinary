@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AppointmentService {
@@ -50,13 +51,21 @@ public class AppointmentService {
     }
 
 
-    public Appointment getAppointmentByType(String typeConsult) {
-        return iAppointmentRepository.findByTypeConsult(typeConsult);
+    public List<Appointment> getAppointmentByType(String typeConsult) {
+        return getAllAppointments()
+                .stream()
+                .filter(c -> typeConsult.equals(c.getTypeConsult()))
+                .collect(Collectors.toList());
+
     }
 
-    public Appointment getAppointmentByStatus(String status) {
-        return iAppointmentRepository.findByStatus(status);
-    }
+    public List<Appointment> getAppointmentByStatus(String status) {
+        return getAllAppointments()
+                    .stream()
+                    .filter(c -> status.equals(c.getStatus()))
+                    .collect(Collectors.toList());
+        }
+
 
     public boolean availableDate(LocalDateTime localDateTime) {
         List<Appointment> appointments = (List<Appointment>) iAppointmentRepository.findAll();
