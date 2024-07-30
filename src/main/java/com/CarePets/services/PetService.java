@@ -5,10 +5,6 @@ import com.CarePets.repositories.IPetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.Optional;
-
-
-import com.CarePets.repositories.IPetRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,7 +17,7 @@ public class PetService {
     public void deletePet(Long id){
         iPetRepository.deleteById(id);
     }
-}
+
     public List<Pet> listPet() {
         return (List<Pet>)iPetRepository.findAll();
     }
@@ -36,4 +32,5 @@ public class PetService {
 
     public Pet addPet(Pet pet) {return IPetRepository.save(pet);
     }
-}
+
+        }

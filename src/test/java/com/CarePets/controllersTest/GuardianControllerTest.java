@@ -11,20 +11,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import com.CarePets.controllers.GuardianController;
 import com.CarePets.models.Guardian;
-import com.CarePets.services.GuardianService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -32,17 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class GuardianControllerTest {
-
-    @Mock
-    private GuardianService guardianService;
-
-    @InjectMocks
-    private GuardianController guardianController;
-
-    private MockMvc mockMvc;
-
 @ExtendWith(MockitoExtension.class)
-public class GuardianControllerTest {
 
     private MockMvc mockMvc;
 
@@ -52,10 +32,6 @@ public class GuardianControllerTest {
     @InjectMocks
     private GuardianController guardianController;
 
-    @BeforeEach
-    public void setUp() {
-        mockMvc = MockMvcBuilders.standaloneSetup(guardianController).build();
-    }
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -69,7 +45,7 @@ public class GuardianControllerTest {
 
         verify(guardianService, times(1)).deleteGuardian(1L);
     }
-}
+
 
     @Test
     public void testCreateGuardian() throws Exception {

@@ -1,22 +1,21 @@
 package com.CarePets.controllers;
 
+
 import com.CarePets.services.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.CarePets.exceptions.PetNotFoundException;
 import com.CarePets.models.Pet;
-import com.CarePets.services.PetService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/pet")
 @CrossOrigin(origins = "*")
 
 public class PetController {
     @Autowired
-     PetService petService;
+    PetService petService;
 
     @DeleteMapping(path = "pets/{id}")
     public void deletePet(@PathVariable Long id){
@@ -28,6 +27,7 @@ public class PetController {
                 .map(Pet::new)
                 .collect(Collectors.toList());
         }
+
     @PutMapping("/{id}")
     public Pet updatePet(@PathVariable Long id, @RequestBody Pet petDetails) {
         Pet existingPet = petService.getPetById(id)
