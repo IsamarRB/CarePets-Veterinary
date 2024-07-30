@@ -30,6 +30,6 @@ public class GuardianService {
     }
 
     public void deleteGuardian(Long id) {
-        guardianRepository.deleteById(id);
+        iGuardianRepository.deleteById(id);
     }
 }
