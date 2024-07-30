@@ -6,22 +6,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.Optional;
 
-public class PetService {
-    @Autowired
-    private IPetRepository petRepository;
 
+import com.CarePets.repositories.IPetRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class PetService {
+
+    @Autowired
+    IPetRepository iPetRepository;
+
+
+    public void deletePet(Long id){
+        iPetRepository.deleteById(id);
+    }
+}
     public List<Pet> listPet() {
-        return (List<Pet>) petRepository.findAll();
+        return (List<Pet>)iPetRepository.findAll();
     }
 
     public Optional<Pet> getPetById(Long id) {
-        return petRepository.findById(id);
+        return iPetRepository.findById(id);
     }
 
     public Pet updatePet(Pet pet) {
-        return petRepository.save(pet);
+        return iPetRepository.save(pet);
     }
 
-    public Pet addPet(Pet pet) {return petRepository.save(pet);
+    public Pet addPet(Pet pet) {return IPetRepository.save(pet);
     }
 }

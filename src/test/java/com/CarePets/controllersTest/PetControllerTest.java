@@ -1,6 +1,19 @@
 package com.CarePets.controllersTest;
 
 import com.CarePets.controllers.PetController;
+import com.CarePets.services.PetService;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.verify;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import com.CarePets.controllers.PetController;
 import com.CarePets.exceptions.PetNotFoundException;
 import com.CarePets.models.Pet;
 import com.CarePets.services.PetService;
@@ -15,20 +28,36 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+@WebMvcTest(PetController.class)
 
 public class PetControllerTest {
+    @Autowired
+    private MockMvc mockMvc;
 
-    @Mock
-    private PetService petService;
-
-    @InjectMocks
-    private PetController petController;
+    @MockBean
+    private PetService PetService;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
     }
+    @Test
 
+    public void deletePetTest() throws Exception {
+        Long petId = 1L;
+
+
+        doNothing().when(PetService).deletePet(petId);
+
+
+        mockMvc.perform(delete("/pet/pets/{id}", petId)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+
+        verify(PetService).deletePet(petId);
+        }
+    }
     @Test
     void listPet_shouldReturnListOfPets() {
         Pet pet1 = new Pet(1L, "Gordita", 12, "Westie", "Female", "url");

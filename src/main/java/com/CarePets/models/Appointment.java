@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.time.LocalDateTime;
 
 import java.time.LocalDateTime;
 
@@ -35,5 +36,8 @@ public class Appointment {
 
         @Column(name = "appointment status")
         private String status;
-    }
 
+        @ManyToOne
+        @JoinColumn (name = "idPet", nullable = false)
+        private Pet pet;
+    }

@@ -1,22 +1,26 @@
 package com.CarePets.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 
-@Table(name = "pet")
+@Table (name = "Pet")
 
 public class Pet {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_pet")
+
+    @Column(name = "id pet")
     private Long idPet;
 
     @Column(name = "name")
@@ -60,4 +64,9 @@ public class Pet {
         this.gender = pet.getGender();
         this.url = pet.getUrl();
     }
+
+    @OneToMany(mappedBy = "pet")
+    private List<Guardian> guardiansList;
+    @OneToMany(mappedBy = "pet")
+    private List<Appointment> appointmentList;
 }

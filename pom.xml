@@ -2,182 +2,172 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-	<modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
+    <parent>
 
-		<groupId>org.springframework.boot</groupId>
+        <groupId>org.springframework.boot</groupId>
 
-		<artifactId>spring-boot-starter-parent</artifactId>
+        <artifactId>spring-boot-starter-parent</artifactId>
 
-		<version>3.3.2</version>
+        <version>3.3.2</version>
 
-		<relativePath/> <!-- lookup parent from repository -->
+        <relativePath/> <!-- lookup parent from repository -->
 
-	</parent>
+    </parent>
 
-	<groupId>com.CarePets</groupId>
+    <groupId>com.CarePets</groupId>
 
-	<artifactId>demo</artifactId>
+    <artifactId>demo</artifactId>
 
-	<version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
 
-	<name>CarePets</name>
+    <name>CarePets</name>
 
-	<description>Veterinary Porject</description>
+    <description>Veterinary Porject</description>
 
-	<url/>
+    <url/>
 
-	<licenses>
+    <licenses>
 
-		<license/>
+        <license/>
 
-	</licenses>
+    </licenses>
 
-	<developers>
+    <developers>
 
-		<developer/>
+        <developer/>
 
-	</developers>
+    </developers>
 
-	<scm>
+    <scm>
 
-		<connection/>
+        <connection/>
 
-		<developerConnection/>
+        <developerConnection/>
 
-		<tag/>
+        <tag/>
 
-		<url/>
+        <url/>
 
-	</scm>
+    </scm>
 
-	<properties>
+    <properties>
 
-		<java.version>21</java.version>
+        <java.version>21</java.version>
 
-	</properties>
+    </properties>
 
-	<dependencies>
+    <dependencies>
 
-		<dependency>
+        <dependency>
 
-			<groupId>org.springframework.boot</groupId>
+            <groupId>org.springframework.boot</groupId>
 
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
 
-		</dependency>
+        </dependency>
 
-		<dependency>
+        <dependency>
 
-			<groupId>org.springframework.boot</groupId>
+            <groupId>org.springframework.boot</groupId>
 
-			<artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
 
-		</dependency>
+        </dependency>
 
 
 
-		<dependency>
+        <dependency>
 
-			<groupId>com.mysql</groupId>
+            <groupId>com.mysql</groupId>
 
-			<artifactId>mysql-connector-j</artifactId>
+            <artifactId>mysql-connector-j</artifactId>
 
-			<scope>runtime</scope>
+            <scope>runtime</scope>
 
-		</dependency>
+        </dependency>
 
-		<dependency>
+        <dependency>
 
-			<groupId>org.projectlombok</groupId>
+            <groupId>org.projectlombok</groupId>
 
-			<artifactId>lombok</artifactId>
+            <artifactId>lombok</artifactId>
 
-			<optional>true</optional>
+            <optional>true</optional>
 
-		</dependency>
+        </dependency>
 
-		<dependency>
+        <dependency>
 
-			<groupId>org.springframework.boot</groupId>
+            <groupId>org.springframework.boot</groupId>
 
-			<artifactId>spring-boot-starter-test</artifactId>
+            <artifactId>spring-boot-starter-test</artifactId>
 
-			<scope>test</scope>
+            <scope>test</scope>
 
-		</dependency>
+        </dependency>
 
-		<dependency>
+        <dependency>
 
-			<groupId>org.mockito</groupId>
+            <groupId>org.mockito</groupId>
 
-			<artifactId>mockito-core</artifactId>
+            <artifactId>mockito-core</artifactId>
 
-			<version>5.11.0</version>
+            <version>5.11.0</version>
 
-			<scope>test</scope>
+            <scope>test</scope>
 
-		</dependency>
+        </dependency>
 
-		<dependency>
+        <dependency>
 
-			<groupId>org.mockito</groupId>
+            <groupId>org.mockito</groupId>
 
-			<artifactId>mockito-junit-jupiter</artifactId>
+            <artifactId>mockito-junit-jupiter</artifactId>
 
-			<version>5.11.0</version>
+            <version>5.11.0</version>
 
-			<scope>test</scope>
+            <scope>test</scope>
 
-		</dependency>
+        </dependency>
 
-		<dependency>
+    </dependencies>
 
-			<groupId>com.h2database</groupId>
 
-			<artifactId>h2</artifactId>
 
-			<version>2.3.230</version>
+    <build>
 
-			<scope>test</scope>
+        <plugins>
 
-		</dependency>
+            <plugin>
 
-	</dependencies>
+                <groupId>org.springframework.boot</groupId>
 
-	<build>
+                <artifactId>spring-boot-maven-plugin</artifactId>
 
-		<plugins>
+                <configuration>
 
-			<plugin>
+                    <excludes>
 
-				<groupId>org.springframework.boot</groupId>
+                        <exclude>
 
-				<artifactId>spring-boot-maven-plugin</artifactId>
+                            <groupId>org.projectlombok</groupId>
 
-				<configuration>
+                            <artifactId>lombok</artifactId>
 
-					<excludes>
+                        </exclude>
 
-						<exclude>
+                    </excludes>
 
-							<groupId>org.projectlombok</groupId>
+                </configuration>
 
-							<artifactId>lombok</artifactId>
+            </plugin>
 
-						</exclude>
+        </plugins>
 
-					</excludes>
-
-				</configuration>
-
-			</plugin>
-
-		</plugins>
-
-	</build>
+    </build>
 
 </project>
