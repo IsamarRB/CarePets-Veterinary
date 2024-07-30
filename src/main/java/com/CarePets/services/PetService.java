@@ -29,8 +29,7 @@ public class PetService {
     public Pet updatePet(Pet pet) {
         return iPetRepository.save(pet);
     }
-
-    public Pet addPet(Pet pet) {return IPetRepository.save(pet);
+    public Pet addPet(Pet pet) {return iPetRepository.save(pet);
     }
 
         }

@@ -29,7 +29,8 @@ public class PetControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private PetService PetService;
+    private PetService petService;
+    private PetController petController;
 
     @BeforeEach
     void setUp() {
@@ -41,7 +42,7 @@ public class PetControllerTest {
         Long petId = 1L;
 
 
-        doNothing().when(PetService).deletePet(petId);
+        doNothing().when(petService).deletePet(petId);
 
 
         mockMvc.perform(delete("/pet/pets/{id}", petId)
@@ -49,20 +50,20 @@ public class PetControllerTest {
                 .andExpect(status().isOk());
 
 
-        verify(PetService).deletePet(petId);
+        verify(petService).deletePet(petId);
         }
 
     @Test
     void listPet_shouldReturnListOfPets() {
         Pet pet1 = new Pet(1L, "Gordita", 12, "Westie", "Female", "url");
         Pet pet2 = new Pet(2L, "Shazam", 10, "Pitbull", "Female", "url");
-        when(PetService.listPet()).thenReturn(Arrays.asList(pet1, pet2));
+        when(petService.listPet()).thenReturn(Arrays.asList(pet1, pet2));
 
-        List<Pet> result = PetController.listPet();
+        List<Pet> result = petController.listPet();
 
         assertNotNull(result);
         assertEquals(2, result.size());
-        verify(PetService, times(1)).listPet();
+        verify(petService, times(1)).listPet();
     }
 
     @Test
@@ -70,28 +71,28 @@ public class PetControllerTest {
         Pet existingPet = new Pet(1L, "Gordita", 12, "Westie", "Female", "url");
         Pet updatedPetDetails = new Pet(1L, "Gordita Updated", 13, "Westie", "Female", "url");
 
-        when(PetService.getPetById(1L)).thenReturn(Optional.of(existingPet));
-        when(PetService.updatePet(existingPet)).thenReturn(updatedPetDetails);
+        when(petService.getPetById(1L)).thenReturn(Optional.of(existingPet));
+        when(petService.updatePet(existingPet)).thenReturn(updatedPetDetails);
 
-        Pet result = PetController.updatePet(1L, updatedPetDetails);
+        Pet result = petController.updatePet(1L, updatedPetDetails);
 
         assertEquals("Gordita Updated", result.getName());
         assertEquals(13, result.getAge());
-        verify(PetService, times(1)).getPetById(1L);
-        verify(PetService, times(1)).updatePet(existingPet);
+        verify(petService, times(1)).getPetById(1L);
+        verify(petService, times(1)).updatePet(existingPet);
     }
 
     @Test
     void updatePet_whenPetNotFound_shouldThrowException() {
         Pet updatedPetDetails = new Pet(1L, "Gordita Updated", 13, "Westie", "Female", "url");
 
-        when(PetService.getPetById(1L)).thenReturn(Optional.empty());
+        when(petService.getPetById(1L)).thenReturn(Optional.empty());
 
         assertThrows(PetNotFoundException.class, () -> {
-            PetController.updatePet(1L, updatedPetDetails);
+            petController.updatePet(1L, updatedPetDetails);
         });
 
-        verify(PetService, times(1)).getPetById(1L);
+        verify(petService, times(1)).getPetById(1L);
     }
 }
 
