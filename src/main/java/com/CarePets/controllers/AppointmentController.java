@@ -35,8 +35,8 @@ public class AppointmentController {
     }
 
     @GetMapping("/appointments/type")
-    public List<Appointment> getAppointmentByType(@RequestBody String consultType) {
-        return appointmentService.getAppointmentByType(consultType);
+    public List<Appointment> getAppointmentByType(@RequestParam String typeConsult) {
+        return appointmentService.getAppointmentByType(typeConsult);
     }
 
     @GetMapping("/appointments/status")

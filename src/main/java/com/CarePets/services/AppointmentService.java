@@ -54,12 +54,13 @@ public class AppointmentService {
     public List<Appointment> getAppointmentByType(String typeConsult) {
         return getAllAppointments()
                 .stream()
-                .filter(c -> typeConsult.equals(c.getTypeConsult()))
+                .filter(c-> typeConsult.equals(c.getTypeConsult()))
                 .collect(Collectors.toList());
 
     }
 
     public List<Appointment> getAppointmentByStatus(String status) {
+        System.out.println(getAppointmentByType("normal"));
         return getAllAppointments()
                     .stream()
                     .filter(c -> status.equals(c.getStatus()))
