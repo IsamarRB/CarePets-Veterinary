@@ -80,15 +80,10 @@ public class AppointmentControllerTest {
         when(appointmentService.getAppointmentByType("urgent")).thenReturn(appointmentList);
 
         //act
-
         List<Appointment> result2 = appointmentController.getAppointmentByType("urgent");
 
-
         //assert
-
         assertEquals("urgent", result2.get(0).getTypeConsult());
-
-
     }
 
 
@@ -106,13 +101,10 @@ public class AppointmentControllerTest {
 
         when(appointmentService.getAppointmentByStatus("pending")).thenReturn(appointmentList);
 
-
         //act
-
         List<Appointment> result2 = appointmentController.getAppointmentByStatus("pending");
 
         //assert
-
         assertEquals("pending", result2.get(0).getStatus());
 
     }
@@ -130,7 +122,6 @@ public class AppointmentControllerTest {
         appointmentList.add(ap2);
         when(appointmentController.getAllAppointments()).thenReturn(appointmentList);
         when(appointmentController.getAppointmentById(1L)).thenReturn(Optional.of(ap1));
-
 
         //act
         List<Appointment> result = appointmentController.getAllAppointments();
@@ -156,7 +147,6 @@ public class AppointmentControllerTest {
         appointmentList.add(ap1);
         appointmentList.add(ap2);
         when(appointmentController.getAllAppointments()).thenReturn(appointmentList);
-
 
         //act
         List<Appointment> result = appointmentController.getAllAppointments();
