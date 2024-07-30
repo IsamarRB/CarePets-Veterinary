@@ -1,24 +1,24 @@
-# Dockerfile
-FROM openjdk:11-jre-slim
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+#IMAGEN MODELO
+FROM
 
-# docker-compose.yml
-version: '3'
-services:
-  app:
-    build: .
-    ports:
-      - "8080:8080"
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:jdbc:mysql://localhost:3306/db_carepetsvet
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=secret
-  db:
-    image: mysql:5.7
-    environment:
-      MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: clinica
-    ports:
-      - "3306:3306"
+LABEL authors="Isamar"
+
+#INFORMAR EL PUERTO DONDE SE EJECUTA EL CONTENEDOR
+EXPOSE 8080
+
+#DEFINIR DIRECTORIO RAIZ DEL CONTENEDOR
+COPY ./pom.xml /root
+COPY ./.mvn /root/.mvn
+COPY ./mvnw /root
+
+#DESCARGAR LAS DEPENDENCIAS
+  RUN ./mvnw dependency:go-offline \
+
+#COPIAR EL CODIGO FUENTE DENTRO DEL CONTENEDOR
+COPY ./src /root/src
+
+#CONSTRUIR APP
+//RUN ./mvnw clean install-DskipTest \
+
+#LEVANTAR APP CUANDO EL CONTENEDOR INICIE
+ENTRYPOINT ["java", "-jar", "target/___.jar"]
