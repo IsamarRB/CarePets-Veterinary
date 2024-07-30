@@ -1,5 +1,6 @@
 package com.CarePets.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.time.LocalDateTime;
 
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -21,7 +21,6 @@ public class Appointment {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-
         @Column(name = "id appointment")
         private Long idAppointment;
 
@@ -37,6 +36,7 @@ public class Appointment {
         @Column(name = "appointment status")
         private String status;
 
+        @JsonIgnoreProperties("appointmentsList")
         @ManyToOne
         @JoinColumn (name = "idPet", nullable = false)
         private Pet pet;

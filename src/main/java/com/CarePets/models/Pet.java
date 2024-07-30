@@ -1,5 +1,6 @@
 package com.CarePets.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -65,8 +66,11 @@ public class Pet {
         this.url = pet.getUrl();
     }
 
+    @JsonIgnoreProperties("pet")
     @OneToMany(mappedBy = "pet")
     private List<Guardian> guardiansList;
+
+    @JsonIgnoreProperties("pet")
     @OneToMany(mappedBy = "pet")
     private List<Appointment> appointmentList;
 }

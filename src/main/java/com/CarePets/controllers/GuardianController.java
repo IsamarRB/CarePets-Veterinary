@@ -18,7 +18,10 @@ public class GuardianController {
     public Guardian createGuardian(@RequestBody Guardian guardian) {
         return guardianService.createGuardian(guardian);
     }
-
+    @PutMapping(path = "/guardians/{id}")
+    public Guardian updateGuardian(@RequestBody Guardian guardian, @PathVariable Long id) {
+        return guardianService.updateGuardian(id, guardian);
+    }
     @DeleteMapping("/{id}")
     public void deleteGuardian(@PathVariable Long id) {
         guardianService.deleteGuardian(id);

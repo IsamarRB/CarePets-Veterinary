@@ -20,6 +20,11 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import com.CarePets.models.Pet;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.hamcrest.Matchers.is;
 
 class GuardianControllerTest {
 @ExtendWith(MockitoExtension.class)
@@ -65,5 +70,26 @@ class GuardianControllerTest {
                 .andExpect(jsonPath("$.idGuardian").value(1L))
                 .andExpect(jsonPath("$.nameAndSurname").value("John Doe"))
                 .andExpect(jsonPath("$.telephoneNumber").value(123456789));
+    }
+    @Test
+    void test_if_updateGuardian_updates_information() throws Exception {
+        // Arrange
+        Long id = 1L;
+        Pet bolita = new Pet();
+        Guardian oldGuardian = new Guardian(id, "Joselitro García", 123456789, bolita);
+        Guardian newGuardian = new Guardian(id, "Kid A", 987654321, bolita);
+
+        when(guardianService.updateGuardian(anyLong(), any(Guardian.class))).thenReturn(newGuardian);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String newGuardianJson = objectMapper.writeValueAsString(newGuardian);
+
+        // Act & Assert
+        mockMvc.perform(put("/guardian/guardians/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(newGuardianJson))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.nameAndSurname", is("Kid A")))
+                .andExpect(jsonPath("$.telephoneNumber", is(987654321)));
     }
 }
