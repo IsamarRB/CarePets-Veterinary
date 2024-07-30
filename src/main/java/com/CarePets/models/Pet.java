@@ -43,9 +43,21 @@ public class Pet {
         this.url = url;
     }
 
+
     public Pet(Pet pet) {
+        this.idPet = pet.getIdPet();
+        this.name = pet.getName();
+        this.age = pet.getAge();
+        this.race = pet.getRace();
+        this.gender = pet.getGender();
+        this.url = pet.getUrl();
     }
 
     public void update(Pet pet) {
+        this.name = pet.getName();
+        this.age = pet.getAge();
+        this.race = pet.getRace();
+        this.gender = pet.getGender();
+        this.url = pet.getUrl();
     }
 }
