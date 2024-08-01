@@ -1,10 +1,10 @@
 package com.CarePets.services;
 
+import com.CarePets.dto.CreateAppointmentDTO;
 import com.CarePets.models.Appointment;
 import com.CarePets.repositories.IAppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.CarePets.dto.CreateAppointmentRequest;
 import com.CarePets.models.Pet;
 import com.CarePets.repositories.IPetRepository;
 import java.time.LocalDateTime;
@@ -25,7 +25,7 @@ public class AppointmentService {
     @Autowired
     IPetRepository iPetRepository;
 
-    public Appointment createAppoinment(CreateAppointmentRequest request) throws Exception {
+    public Appointment createAppoinment(CreateAppointmentDTO request) throws Exception {
         Optional<Pet> optionalPet = iPetRepository.findById(request.getIdPet());
         if (!optionalPet.isPresent()) {
             throw new Exception("Pet not found");
@@ -63,7 +63,7 @@ public class AppointmentService {
     }
 
     public List<Appointment> getAppointmentByStatus(String status) {
-        System.out.println(getAppointmentByType("normal"));
+
         return getAllAppointments()
                 .stream()
                 .filter(c -> status.equals(c.getStatus()))
