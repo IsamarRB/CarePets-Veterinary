@@ -1,6 +1,6 @@
 package com.CarePets.controllers;
 
-import com.CarePets.dto.CreateAppointmentDTO;
+import com.CarePets.dto.CreateAppointmentRequest;
 import com.CarePets.models.Appointment;
 import com.CarePets.services.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class AppointmentController {
     @Autowired
     AppointmentService appointmentService;
     @PostMapping("/appointments")
-    public Appointment createAppointment(@RequestBody CreateAppointmentDTO request) throws Exception {
+    public Appointment createAppointment(@RequestBody CreateAppointmentRequest request) throws Exception {
         return appointmentService.createAppoinment(request);
     }
 

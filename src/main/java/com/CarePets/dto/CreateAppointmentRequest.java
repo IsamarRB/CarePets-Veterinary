@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Setter
 @Getter
-public class CreateAppointmentDTO {
+public class CreateAppointmentRequest {
 
 
     private LocalDateTime dateTime;

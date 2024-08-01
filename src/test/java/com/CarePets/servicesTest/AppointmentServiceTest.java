@@ -188,6 +188,10 @@ public class AppointmentServiceTest {
     public void testAvailableDate_when_date_is_not_available(){
         LocalDateTime dateTime = LocalDateTime.of (2024, 7, 25, 10, 0);
         List <Appointment> appointments = new ArrayList<>();
+        Appointment appointment = new Appointment();
+        appointment.setDateTime(dateTime);
+        appointments.add(appointment);
+
         when(iAppointmentRepository.findAll()).thenReturn(appointments);
 
         //act

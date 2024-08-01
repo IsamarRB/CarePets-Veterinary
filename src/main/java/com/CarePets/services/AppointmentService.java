@@ -1,6 +1,6 @@
 package com.CarePets.services;
 
-import com.CarePets.dto.CreateAppointmentDTO;
+import com.CarePets.dto.CreateAppointmentRequest;
 import com.CarePets.models.Appointment;
 import com.CarePets.repositories.IAppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class AppointmentService {
     @Autowired
     IPetRepository iPetRepository;
 
-    public Appointment createAppoinment(CreateAppointmentDTO request) throws Exception {
+    public Appointment createAppoinment(CreateAppointmentRequest request) throws Exception {
         Optional<Pet> optionalPet = iPetRepository.findById(request.getIdPet());
         if (!optionalPet.isPresent()) {
             throw new Exception("Pet not found");
