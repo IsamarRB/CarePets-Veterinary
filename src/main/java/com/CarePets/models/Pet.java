@@ -68,10 +68,10 @@ public class Pet {
     }
 
     @OneToMany(mappedBy = "pet")
-    @JsonManagedReference("pet")
+    @JsonManagedReference
     private List<Guardian> guardiansList;
 
     @OneToMany(mappedBy = "pet")
-    @JsonManagedReference("pet")
+    @JsonManagedReference
     private List<Appointment> appointmentsList;
 }
