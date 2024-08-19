@@ -27,6 +27,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
+import static org.mockito.Mockito.doNothing;
 
 public class AppointmentServiceTest {
 
@@ -218,5 +219,15 @@ public class AppointmentServiceTest {
 
 
         verify(iAppointmentRepository, times(1)).save(updateAppointment);
+    }
+    @Test
+    void deleteAppointmentTest() {
+        Long id = 1L;
+
+        doNothing().when(iAppointmentRepository).deleteById(id);
+
+        appointmentService.deleteAppointment(id);
+
+        verify(iAppointmentRepository).deleteById(id);
     }
 }

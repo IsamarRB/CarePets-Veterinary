@@ -69,8 +69,6 @@ public class Pet {
     @JsonIgnoreProperties("pet")
     @OneToMany(mappedBy = "pet")
     private List<Guardian> guardiansList;
-
-    @JsonIgnoreProperties("pet")
     @OneToMany(mappedBy = "pet")
     private List<Appointment> appointmentList;
 }

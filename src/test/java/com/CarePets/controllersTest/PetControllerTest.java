@@ -2,7 +2,10 @@ package com.CarePets.controllersTest;
 
 import com.CarePets.controllers.PetController;
 import com.CarePets.services.PetService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -11,16 +14,24 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import com.CarePets.exceptions.PetNotFoundException;
 import com.CarePets.models.Pet;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.MockitoAnnotations;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 @WebMvcTest(PetController.class)
 
@@ -32,9 +43,18 @@ public class PetControllerTest {
     private PetService petService;
     private PetController petController;
 
+    @Mock
+    private PetService petService;
+
+    @InjectMocks
+    private PetController petController;
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+        this.mockMvc = MockMvcBuilders
+                .standaloneSetup(petController)
+                .build();
     }
 
     @Test
@@ -93,6 +113,33 @@ public class PetControllerTest {
         });
 
         verify(petService, times(1)).getPetById(1L);
+    }
+    @Test
+    public void testAddNewPet() throws Exception {
+        Pet pet = new Pet();
+        pet.setIdPet(1L);
+        pet.setName("Balud");
+        pet.setAge(5);
+        pet.setRace("Golden Retriever");
+        pet.setGender("Male");
+        pet.setUrl("http://example.com/balud.jpg");
+
+        when(petService.addNewPet(any(Pet.class))).thenReturn(pet);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String petJson = objectMapper.writeValueAsString(pet);
+
+        ResultActions resultActions = mockMvc.perform(post("/pet/pets")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(petJson));
+
+        resultActions.andExpect(status().isOk())
+                .andExpect(jsonPath("$.idPet").value(1L))
+                .andExpect(jsonPath("$.name").value("Balud"))
+                .andExpect(jsonPath("$.age").value(5))
+                .andExpect(jsonPath("$.race").value("Golden Retriever"))
+                .andExpect(jsonPath("$.gender").value("Male"))
+                .andExpect(jsonPath("$.url").value("http://example.com/balud.jpg"));
     }
 }
 

@@ -80,4 +80,10 @@ public class AppointmentService {
         }
         return true;
     }
+    @Autowired
+    IAppointmentRepository iAppointmentRepository;
+
+    public void deleteAppointment(Long id){
+        iAppointmentRepository.deleteById(id);
+    }
 }

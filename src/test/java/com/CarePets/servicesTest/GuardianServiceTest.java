@@ -10,11 +10,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 import com.CarePets.models.Pet;
 import java.util.Optional;
 import static org.mockito.ArgumentMatchers.any;
-
+import java.util.ArrayList;
 
 
 class GuardianServiceTest {
@@ -78,4 +79,30 @@ class GuardianServiceTest {
             guardianService.deleteGuardian(id);
             verify(iGuardianRepository, times(1)).deleteById(id);
         }
+    public GuardianServiceTest() {
+        MockitoAnnotations.openMocks(this);
+    }
+
+    @Test
+    public void testGetByGuardiansById() {
+        Guardian guardian = new Guardian(1L, "John Doe", 123456789, null);
+        when(guardianRepository.findById(1L)).thenReturn(Optional.of(guardian));
+
+        Optional<Guardian> result = guardianService.getByGuardiansById(1L);
+
+        assertTrue(result.isPresent());
+        assertEquals("John Doe", result.get().getNameAndSurname());
+    }
+
+    @Test
+    public void testGetAllGuardians() {
+        ArrayList<Guardian> guardians = new ArrayList<>();
+        guardians.add(new Guardian(1L, "John Doe", 123456789, null));
+        when(guardianRepository.findAll()).thenReturn(guardians);
+
+        ArrayList<Guardian> result = guardianService.getAllGuardians();
+
+        assertEquals(1, result.size());
+        assertEquals("John Doe", result.get(0).getNameAndSurname());
+    }
     }

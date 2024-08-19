@@ -41,4 +41,7 @@ public class PetController {
 
         return petService.updatePet(existingPet);
     }
+    @PostMapping(path = "/pets")
+    public Pet addNewPet(@RequestBody Pet pet){ return petService.addNewPet(pet);    }
+
 }

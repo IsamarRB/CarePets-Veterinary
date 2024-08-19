@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.ArrayList;
 
 @Service
 public class GuardianService {
@@ -32,4 +33,8 @@ public class GuardianService {
     public void deleteGuardian(Long id) {
         iGuardianRepository.deleteById(id);
     }
+    public Optional<Guardian> getByGuardiansById(Long id) { return iGuardianRepository.findById(id); }
+
+    public ArrayList<Guardian> getAllGuardians() { return (ArrayList<Guardian>) iGuardianRepository.findAll(); }
+
 }
