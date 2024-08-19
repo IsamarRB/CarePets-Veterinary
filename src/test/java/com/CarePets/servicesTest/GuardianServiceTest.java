@@ -86,7 +86,7 @@ class GuardianServiceTest {
     @Test
     public void testGetByGuardiansById() {
         Guardian guardian = new Guardian(1L, "John Doe", 123456789, null);
-        when(guardianRepository.findById(1L)).thenReturn(Optional.of(guardian));
+        when(iGuardianRepository.findById(1L)).thenReturn(Optional.of(guardian));
 
         Optional<Guardian> result = guardianService.getByGuardiansById(1L);
 
@@ -98,7 +98,7 @@ class GuardianServiceTest {
     public void testGetAllGuardians() {
         ArrayList<Guardian> guardians = new ArrayList<>();
         guardians.add(new Guardian(1L, "John Doe", 123456789, null));
-        when(guardianRepository.findAll()).thenReturn(guardians);
+        when(iGuardianRepository.findAll()).thenReturn(guardians);
 
         ArrayList<Guardian> result = guardianService.getAllGuardians();
 

@@ -41,10 +41,10 @@ public class PetControllerTest {
 
     @MockBean
     private PetService petService;
-    private PetController petController;
+    //private PetController petController;
 
-    @Mock
-    private PetService petService;
+  //  @Mock
+   // private PetService petService;
 
     @InjectMocks
     private PetController petController;

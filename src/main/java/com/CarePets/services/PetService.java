@@ -33,6 +33,6 @@ public class PetService {
     }
     public Pet addPet(Pet pet) {return iPetRepository.save(pet);
     }
-    public Pet addNewPet(Pet pet) { return iIPetRepository.save(pet);}
+    public Pet addNewPet(Pet pet) { return iPetRepository.save(pet);}
 
 }
