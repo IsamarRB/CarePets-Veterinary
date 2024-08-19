@@ -24,7 +24,7 @@ public class GuardianController {
     public Guardian createGuardian(@RequestBody Guardian guardian) {
         return guardianService.createGuardian(guardian);
     }
-    @PutMapping(path = "/guardians/{id}")
+    @PutMapping(path = "/guardians/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Guardian updateGuardian(@RequestBody Guardian guardian, @PathVariable Long id) {
         return guardianService.updateGuardian(id, guardian);
     }
