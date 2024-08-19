@@ -1,5 +1,6 @@
 package com.CarePets.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -29,8 +30,9 @@ public class Guardian {
         @Column(name = "telephone number")
         private int telephoneNumber;
 
-        @JsonIgnoreProperties("guardiansList")
+
         @ManyToOne
         @JoinColumn (name = "idPet", nullable = false)
+        @JsonBackReference
         private Pet pet;
     }
