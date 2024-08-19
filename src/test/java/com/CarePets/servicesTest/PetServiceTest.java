@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Optional;
 
 
-
 class PetServiceTest {
     @Mock
     private IPetRepository iPetRepository;
@@ -55,7 +54,7 @@ class PetServiceTest {
         Pet pet2 = new Pet(2L, "Shazam", 10, "Pitbull", "Female", "url");
         when(iPetRepository.findAll()).thenReturn(Arrays.asList(pet1, pet2));
 
-        List<Pet> pets = petService.listPet();
+        List<Pet> pets = petService.getAllPets();
 
         assertEquals(2, pets.size());
         verify(iPetRepository, times(1)).findAll();

@@ -26,14 +26,14 @@ class GuardianServiceTest {
     private GuardianService guardianService;
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
 
         MockitoAnnotations.openMocks(this);
     }
 
 
     @Test
-    public void testCreateGuardian(){
+    public void testCreateGuardian() {
 
         Guardian guardianToSave = new Guardian();
         Long id = 1L;
@@ -73,12 +73,14 @@ class GuardianServiceTest {
         assertEquals(newGuardian.getTelephoneNumber(), updatedGuardian.getTelephoneNumber());
 
     }
-        @Test
-        void deleteGuardian_shouldDeleteGuardian() {
-            Long id = 1L;
-            guardianService.deleteGuardian(id);
-            verify(iGuardianRepository, times(1)).deleteById(id);
-        }
+
+    @Test
+    void deleteGuardian_shouldDeleteGuardian() {
+        Long id = 1L;
+        guardianService.deleteGuardian(id);
+        verify(iGuardianRepository, times(1)).deleteById(id);
+    }
+
     public GuardianServiceTest() {
         MockitoAnnotations.openMocks(this);
     }
@@ -105,4 +107,4 @@ class GuardianServiceTest {
         assertEquals(1, result.size());
         assertEquals("John Doe", result.get(0).getNameAndSurname());
     }
-    }
+}

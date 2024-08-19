@@ -5,7 +5,6 @@ import com.CarePets.services.PetService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -41,10 +40,6 @@ public class PetControllerTest {
 
     @MockBean
     private PetService petService;
-    //private PetController petController;
-
-  //  @Mock
-   // private PetService petService;
 
     @InjectMocks
     private PetController petController;
@@ -71,19 +66,19 @@ public class PetControllerTest {
 
 
         verify(petService).deletePet(petId);
-        }
+    }
 
     @Test
     void listPet_shouldReturnListOfPets() {
         Pet pet1 = new Pet(1L, "Gordita", 12, "Westie", "Female", "url");
         Pet pet2 = new Pet(2L, "Shazam", 10, "Pitbull", "Female", "url");
-        when(petService.listPet()).thenReturn(Arrays.asList(pet1, pet2));
+        when(petService.getAllPets()).thenReturn(Arrays.asList(pet1, pet2));
 
-        List<Pet> result = petController.listPet();
+        List<Pet> result = petController.getAllPets();
 
         assertNotNull(result);
         assertEquals(2, result.size());
-        verify(petService, times(1)).listPet();
+        verify(petService, times(1)).getAllPets();
     }
 
     @Test
@@ -142,5 +137,3 @@ public class PetControllerTest {
                 .andExpect(jsonPath("$.url").value("http://example.com/balud.jpg"));
     }
 }
-
-

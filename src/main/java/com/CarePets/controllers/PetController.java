@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import com.CarePets.exceptions.PetNotFoundException;
 import com.CarePets.models.Pet;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/pet")
@@ -21,12 +22,16 @@ public class PetController {
     public void deletePet(@PathVariable Long id){
         petService.deletePet(id);
     }
-    @GetMapping
-    public List<Pet> listPet() {
-        return petService.listPet().stream()
-                .map(Pet::new)
-                .collect(Collectors.toList());
-        }
+
+    @GetMapping("/pets")
+    public List<Pet> getAllPets() {
+        return petService.getAllPets();
+    }
+
+    @GetMapping("/pets/{id}")
+    public Optional<Pet> getPetById(@PathVariable Long id) {
+        return petService.getPetById(id);
+    }
 
     @PutMapping("/{id}")
     public Pet updatePet(@PathVariable Long id, @RequestBody Pet petDetails) {

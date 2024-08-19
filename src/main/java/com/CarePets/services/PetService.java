@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
 
 
 @Service
@@ -20,7 +19,11 @@ public class PetService {
         iPetRepository.deleteById(id);
     }
 
-    public List<Pet> listPet() {
+    public Pet addPet(Pet pet) {return iPetRepository.save(pet);
+    }
+    public Pet addNewPet(Pet pet) { return iPetRepository.save(pet);}
+
+    public List<Pet> getAllPets() {
         return (List<Pet>)iPetRepository.findAll();
     }
 
@@ -31,8 +34,4 @@ public class PetService {
     public Pet updatePet(Pet pet) {
         return iPetRepository.save(pet);
     }
-    public Pet addPet(Pet pet) {return iPetRepository.save(pet);
-    }
-    public Pet addNewPet(Pet pet) { return iPetRepository.save(pet);}
-
 }
