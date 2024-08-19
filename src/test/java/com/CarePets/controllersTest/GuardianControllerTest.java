@@ -39,13 +39,14 @@ import static org.hamcrest.Matchers.is;
 class GuardianControllerTest {
 @ExtendWith(MockitoExtension.class)
 
-    private MockMvc mockMvc;
+
 
     @Mock
     private GuardianService guardianService;
 
     @InjectMocks
     private GuardianController guardianController;
+    private MockMvc mockMvc;
 
     @BeforeEach
     void setUp() {
@@ -96,6 +97,27 @@ class GuardianControllerTest {
 
         assertEquals(1, result.size());
         assertEquals("John Doe", result.get(0).getNameAndSurname());
+    }
+    @Test
+    void test_if_updateGuardian_updates_information() throws Exception {
+        // Arrange
+        Long id = 1L;
+        Pet bolita = new Pet();
+        Guardian oldGuardian = new Guardian(id, "Joselitro García", 123456789, bolita);
+        Guardian newGuardian = new Guardian(id, "Kid A", 987654321, bolita);
+
+        when(guardianService.updateGuardian(anyLong(), any(Guardian.class))).thenReturn(newGuardian);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String newGuardianJson = objectMapper.writeValueAsString(newGuardian);
+
+        // Act & Assert
+        mockMvc.perform(put("/guardian/guardians/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(newGuardianJson))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.nameAndSurname", is("Kid A")))
+                .andExpect(jsonPath("$.telephoneNumber", is(987654321)));
     }
 
 }
