@@ -1,5 +1,6 @@
 package com.CarePets.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,5 +31,6 @@ public class Guardian {
 
         @ManyToOne
         @JoinColumn (name = "idPet", nullable = false)
+        @JsonBackReference
         private Pet pet;
     }
