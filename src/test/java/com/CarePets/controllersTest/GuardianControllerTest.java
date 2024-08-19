@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.openMocks;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -70,11 +71,11 @@ class GuardianControllerTest {
 
         when(guardianService.createGuardian(any(Guardian.class))).thenReturn(guardian);
 
-}
-    public GuardianControllerTest() {
-        openMocks(this);
-    }
+        Guardian createdGuardian = guardianService.createGuardian(guardian);
 
+        assertNotNull(createdGuardian);
+        assertEquals(1L, createdGuardian.getIdGuardian());
+}
     @Test
     public void testGetByGuardiansById() {
         Guardian guardian = new Guardian(1L, "John Doe", 123456789, null);
