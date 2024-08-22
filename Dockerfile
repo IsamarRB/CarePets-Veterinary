@@ -1,0 +1,24 @@
+#IMAGEN MODELO
+FROM
+
+LABEL authors="Isamar"
+
+#INFORMAR EL PUERTO DONDE SE EJECUTA EL CONTENEDOR
+EXPOSE 8080
+
+#DEFINIR DIRECTORIO RAIZ DEL CONTENEDOR
+COPY ./pom.xml /root
+COPY ./.mvn /root/.mvn
+COPY ./mvnw /root
+
+#DESCARGAR LAS DEPENDENCIAS
+  RUN ./mvnw dependency:go-offline \
+
+#COPIAR EL CODIGO FUENTE DENTRO DEL CONTENEDOR
+COPY ./src /root/src
+
+#CONSTRUIR APP
+//RUN ./mvnw clean install-DskipTest \
+
+#LEVANTAR APP CUANDO EL CONTENEDOR INICIE
+ENTRYPOINT ["java", "-jar", "target/___.jar"]

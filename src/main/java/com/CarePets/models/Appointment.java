@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.time.LocalDateTime;
 
+
 @Entity
 @Getter
 @Setter
@@ -20,7 +21,6 @@ public class Appointment {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-
         @Column(name = "id appointment")
         private Long idAppointment;
 
@@ -41,4 +41,3 @@ public class Appointment {
         @JsonBackReference
         private Pet pet;
     }
-

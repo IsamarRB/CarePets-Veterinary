@@ -1,6 +1,6 @@
 package com.CarePets.models;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -39,11 +39,36 @@ public class Pet {
     @Column(name = "url")
     private String url;
 
-    @OneToMany(mappedBy = "pet")
-    @JsonManagedReference("pet")
-    private List<Guardian> guardiansList;
+    public Pet(Long idPet, String name, int age, String race, String gender, String url) {
+        this.idPet = idPet;
+        this.name = name;
+        this.age = age;
+        this.race = race;
+        this.gender = gender;
+        this.url = url;
+    }
 
+
+    public Pet(Pet pet) {
+        this.idPet = pet.getIdPet();
+        this.name = pet.getName();
+        this.age = pet.getAge();
+        this.race = pet.getRace();
+        this.gender = pet.getGender();
+        this.url = pet.getUrl();
+    }
+
+    public void update(Pet pet) {
+        this.name = pet.getName();
+        this.age = pet.getAge();
+        this.race = pet.getRace();
+        this.gender = pet.getGender();
+        this.url = pet.getUrl();
+    }
+
+    @JsonIgnoreProperties("pet")
     @OneToMany(mappedBy = "pet")
-    @JsonManagedReference("pet")
-    private List<Appointment> appointmentsList;
+    private List<Guardian> guardiansList;
+    @OneToMany(mappedBy = "pet")
+    private List<Appointment> appointmentList;
 }
